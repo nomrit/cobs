@@ -43,7 +43,7 @@ fn main() -> io::Result<()> {
     assert_eq!(r,256);
 
     for i in 0..256 {
-        println!("i={}, src={}, dst={}",i,src[i],dst[i])
+        println!("i={}, src={:<02x}, dst={:<02x}",i,src[i],dst[i])
     }
 
     for i in 0..256 {
