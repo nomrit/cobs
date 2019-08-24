@@ -1,4 +1,5 @@
 use std::io;
+use std::num::Wrapping;
 // use std::io::*;
 
 /*
@@ -25,7 +26,7 @@ fn usage(program: &str, opt: Options) {
 
 fn encode(src: & [u8], dst:& mut [u8]) -> usize {
     for i in 0..src.len() {
-        dst[i] = src[i];
+        dst[i] = (Wrapping(src[i])+Wrapping(1u8)).0
     }
     return src.len()
 }
@@ -46,9 +47,5 @@ fn main() -> io::Result<()> {
         println!("i={}, src={:<02x}, dst={:<02x}",i,src[i],dst[i])
     }
 
-    for i in 0..256 {
-        assert_eq!(dst[i],i as u8);
-    }
-    
     std::process::exit(0);
 }
