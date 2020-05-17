@@ -3,7 +3,7 @@ use std::num::Wrapping;
 use std::env;
 
 fn usage(program: &str) {
-    let head = format!("usage : {} <file-name>",program);
+    let head = format!("usage : {} <in-file> <out-file>",program);
     println!("{}",head);
 }
 
