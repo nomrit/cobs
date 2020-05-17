@@ -1,28 +1,11 @@
 use std::io;
 use std::num::Wrapping;
-// use std::io::*;
+use std::env;
 
-/*
- struct info {
-     u8 type;
-     u8 office;
-     u8 platform;
-     u32 time;
-     u8 bandwidth;
-     u8 channel;
-     u32 lat,lon; u16 alt;
-     u16 roll,pitch,yaw;
-     u8 cameratype;
-     u16 pan,tilt,roll,fov;
-     u16 north,east,down;
-     u16 lat_s,lon_s; u16 alt_s;
-}; */
-
-/*
-fn usage(program: &str, opt: Options) {
-    let head = format!("usage {} [options] <file-name>",program);
-    print!("{}",opt.usage(&head));
-} */
+fn usage(program: &str) {
+    let head = format!("usage : {} <file-name>",program);
+    println!("{}",head);
+}
 
 fn encode(src: & [u8], dst:& mut [u8]) -> usize {
     for i in 0..src.len() {
@@ -32,6 +15,14 @@ fn encode(src: & [u8], dst:& mut [u8]) -> usize {
 }
 
 fn main() -> io::Result<()> {
+
+    if env::args().count()!=3 {
+        let args: Vec<String> = env::args().collect();
+
+        usage(&args[0]);
+        std::process::exit(1);
+    }
+
     let mut src = [0;256];
     let mut dst = [0;256];
 
