@@ -5,6 +5,7 @@ use std::env;
 fn usage(program: &str) {
     let head = format!("usage : {} <in-file> <out-file>",program);
     println!("{}",head);
+    std::process::exit(1);
 }
 
 fn encode(src: & [u8], dst:& mut [u8]) -> usize {
@@ -15,13 +16,18 @@ fn encode(src: & [u8], dst:& mut [u8]) -> usize {
 }
 
 fn main() -> io::Result<()> {
+    let mut args = env::args();
 
-    if env::args().count()!=3 {
-        let args: Vec<String> = env::args().collect();
-
-        usage(&args[0]);
-        std::process::exit(1);
+    let cmd = args.next().unwrap();
+    if args.len() !=2 {
+        usage(&cmd);
     }
+    let infile = args.next().unwrap();
+    let outfile = args.next().unwrap();
+
+    println!("{}",cmd);
+    println!("{}",infile);
+    println!("{}",outfile);
 
     let mut src = [0;256];
     let mut dst = [0;256];
